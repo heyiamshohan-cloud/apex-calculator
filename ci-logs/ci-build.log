@@ -35,11 +35,11 @@ Daemon will be stopped at the end of the build
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
 
-> Task :app:javaPreCompileDebugUnitTest
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:13:21 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
 
@@ -60,8 +60,8 @@ w: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/co
 > Task :app:dexBuilderDebug
 > Task :app:mergeDebugGlobalSynthetics
 > Task :app:processDebugJavaRes
-> Task :app:bundleDebugClassesToCompileJar
 > Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
 > Task :app:mergeProjectDexDebug
 > Task :app:mergeDebugJavaResource
 > Task :app:kspDebugUnitTestKotlin
@@ -72,38 +72,65 @@ w: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/co
 > Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
 > Task :app:processDebugUnitTestJavaRes
 
-> Task :app:testDebugUnitTest
+> Task :app:testDebugUnitTest FAILED
 
 ExpressionEngineTest > decimal arithmetic is exact FAILED
-    org.junit.ComparisonFailure at ExpressionEngineTest.kt:142
+    org.junit.ComparisonFailure: expected:<1[]024> but was:<1[,]024>
+        at org.junit.Assert.assertEquals(Assert.java:117)
+        at org.junit.Assert.assertEquals(Assert.java:146)
+        at com.shohankhan.apexcalculator.core.math.ExpressionEngineTest.decimal arithmetic is exact(ExpressionEngineTest.kt:142)
 
 ExpressionEngineTest > powers are right associative and unary minus binds looser FAILED
-    java.lang.AssertionError at ExpressionEngineTest.kt:68
+    java.lang.AssertionError: expected:<0.5> but was:<2.0>
+        at org.junit.Assert.fail(Assert.java:89)
+        at org.junit.Assert.failNotEquals(Assert.java:835)
+        at org.junit.Assert.assertEquals(Assert.java:555)
+        at org.junit.Assert.assertEquals(Assert.java:685)
+        at com.shohankhan.apexcalculator.core.math.ExpressionEngineTest.powers are right associative and unary minus binds looser(ExpressionEngineTest.kt:68)
 
 FractionsTest > rejects malformed input FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:99
+    com.shohankhan.apexcalculator.core.math.MathEvalException: Enter a fraction
+        at app//com.shohankhan.apexcalculator.core.math.Fractions.parse(Fractions.kt:26)
+        at app//com.shohankhan.apexcalculator.core.math.FractionsTest.rejects malformed input(FractionsAndStatisticsTest.kt:99)
 
 FractionsTest > division by zero is rejected FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:60
+    com.shohankhan.apexcalculator.core.math.MathEvalException: Division by zero is undefined
+        at app//com.shohankhan.apexcalculator.core.math.Rational.div(Rational.kt:34)
+        at app//com.shohankhan.apexcalculator.core.math.FractionsTest.division by zero is rejected(FractionsAndStatisticsTest.kt:60)
 
 NumericalTest > degree mode is respected by the engine functions FAILED
-    java.lang.AssertionError at NumericalAndDateTest.kt:72
+    java.lang.AssertionError: expected:<0.5> but was:<0.8660254037872587>
+        at org.junit.Assert.fail(Assert.java:89)
+        at org.junit.Assert.failNotEquals(Assert.java:835)
+        at org.junit.Assert.assertEquals(Assert.java:555)
+        at org.junit.Assert.assertEquals(Assert.java:685)
+        at com.shohankhan.apexcalculator.core.math.NumericalTest.degree mode is respected by the engine functions(NumericalAndDateTest.kt:72)
 
 ProbabilityTest > combinations and permutations FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:268
+    com.shohankhan.apexcalculator.core.math.MathEvalException: r cannot be greater than n
+        at app//com.shohankhan.apexcalculator.core.math.Probability.combinations(Probability.kt:26)
+        at app//com.shohankhan.apexcalculator.core.math.ProbabilityTest.combinations and permutations(FractionsAndStatisticsTest.kt:268)
 
 ProbabilityTest > invalid probability arguments are rejected FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:293
+    com.shohankhan.apexcalculator.core.math.MathEvalException: Probability must be between 0 and 1
+        at app//com.shohankhan.apexcalculator.core.math.Probability.requireProbability(Probability.kt:38)
+        at app//com.shohankhan.apexcalculator.core.math.Probability.requireProbability$default(Probability.kt:36)
+        at app//com.shohankhan.apexcalculator.core.math.ProbabilityTest.invalid probability arguments are rejected(FractionsAndStatisticsTest.kt:293)
 
 ProgrammerTest > arithmetic wraps inside the selected width FAILED
-    java.lang.AssertionError at ProgrammerAndMatrixTest.kt:76
+    java.lang.AssertionError
+        at org.junit.Assert.fail(Assert.java:87)
+        at org.junit.Assert.assertTrue(Assert.java:42)
+        at org.junit.Assert.assertTrue(Assert.java:53)
+        at com.shohankhan.apexcalculator.core.math.ProgrammerTest.arithmetic wraps inside the selected width(ProgrammerAndMatrixTest.kt:76)
 
 ProgrammerTest > radix formatting FAILED
-    org.junit.ComparisonFailure at ProgrammerAndMatrixTest.kt:27
+    org.junit.ComparisonFailure: expected:<[]1010> but was:<[0000000000000000000000000000]1010>
+        at org.junit.Assert.assertEquals(Assert.java:117)
+        at org.junit.Assert.assertEquals(Assert.java:146)
+        at com.shohankhan.apexcalculator.core.math.ProgrammerTest.radix formatting(ProgrammerAndMatrixTest.kt:27)
 
 108 tests completed, 9 failed
-
-> Task :app:testDebugUnitTest FAILED
 
 FAILURE: Build failed with an exception.
 
@@ -280,5 +307,5 @@ Caused by: org.gradle.api.internal.exceptions.MarkedVerificationException: There
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
 
 
-BUILD FAILED in 3m 16s
+BUILD FAILED in 2m 17s
 45 actionable tasks: 45 executed
