@@ -16,7 +16,6 @@ Daemon will be stopped at the end of the build
 > Task :app:parseDebugLocalResources
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
-> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
@@ -24,61 +23,36 @@ Daemon will be stopped at the end of the build
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
 > Task :app:desugarDebugFileDependencies
-> Task :app:processDebugResources
+> Task :app:mergeDebugJniLibFolders
 > Task :app:checkDebugDuplicateClasses
-> Task :app:kspDebugKotlin
+> Task :app:mergeDebugNativeLibs
+> Task :app:processDebugManifestForPackage
 > Task :app:mergeExtDexDebug
 > Task :app:mergeLibDexDebug
-> Task :app:mergeDebugJniLibFolders
-> Task :app:mergeDebugNativeLibs
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
+
+> Task :app:processDebugResources
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:preDebugUnitTestBuild UP-TO-DATE
 > Task :app:javaPreCompileDebugUnitTest
-
-> Task :app:stripDebugDebugSymbols
-Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
+> Task :app:kspDebugKotlin
 
 > Task :app:compileDebugKotlin FAILED
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/designsystem/ApexIcons.kt:40:32 Unresolved reference 'cubicTo'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/designsystem/ApexIcons.kt:41:13 Unresolved reference 'cubicTo'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/designsystem/Components.kt:254:14 None of the following candidates is applicable:
-fun Modifier.clickable(interactionSource: MutableInteractionSource?, indication: Indication?, enabled: Boolean = ..., onClickLabel: String? = ..., role: Role? = ..., onClick: () -> Unit): Modifier
-fun Modifier.clickable(enabled: Boolean = ..., onClickLabel: String? = ..., role: Role? = ..., onClick: () -> Unit): Modifier
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/ComplexNumber.kt:33:57 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/ComplexNumber.kt:33:67 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Functions.kt:246:61 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Functions.kt:246:71 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Functions.kt:260:61 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Functions.kt:260:71 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Num.kt:155:48 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Num.kt:155:58 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Num.kt:199:37 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Num.kt:199:47 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Num.kt:225:36 Argument type mismatch: actual type is 'kotlin.Int', but 'kotlin.Long' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Num.kt:258:62 Unresolved reference 'signum'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:34:51 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:34:61 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:48:62 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:48:72 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:113:68 Argument type mismatch: actual type is 'kotlin.Unit', but 'com.shohankhan.apexcalculator.core.math.MathError' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:113:78 Classifier 'data class DivisionByZero : MathError' does not have a companion object, so it cannot be used as an expression.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:50:18 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:52:80 Unresolved reference 'toFormatSettings'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:146:18 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:157:38 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:161:40 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:188:25 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:216:33 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:230:21 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:241:25 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardScreen.kt:252:25 Unresolved reference 'MaterialTheme'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardViewModel.kt:93:92 Unresolved reference 'toFormatSettings'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardViewModel.kt:119:63 Unresolved reference 'toFormatSettings'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardViewModel.kt:274:66 Unresolved reference 'toFormatSettings'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardViewModel.kt:275:65 Unresolved reference 'toFormatSettings'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/standard/StandardViewModel.kt:310:58 Unresolved reference 'toFormatSettings'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:388:64 Argument type mismatch: actual type is 'kotlin.Long', but 'kotlin.Int' was expected.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:388:91 Argument type mismatch: actual type is 'kotlin.Long', but 'kotlin.Int' was expected.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:27:64 None of the following candidates is applicable:
+fun abs(x: Double): Double
+fun abs(x: Float): Float
+fun abs(n: Int): Int
+fun abs(n: Long): Long
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:325:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:352:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:383:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:412:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
 
 FAILURE: Build failed with an exception.
 
@@ -287,5 +261,5 @@ Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilat
 	... 2 more
 
 
-BUILD FAILED in 2m 35s
+BUILD FAILED in 2m 32s
 31 actionable tasks: 31 executed
