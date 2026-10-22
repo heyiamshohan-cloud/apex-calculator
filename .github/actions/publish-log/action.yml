@@ -1,0 +1,46 @@
+name: Publish diagnostic log
+description: >-
+  Copies a captured build log into ci-logs/ and commits it to the current branch so
+  build diagnostics are available even when the Actions log API is unreachable.
+
+inputs:
+  source:
+    description: Absolute path of the captured log file.
+    required: false
+    default: /tmp/build.log
+  name:
+    description: Log file name inside ci-logs/.
+    required: false
+    default: build.log
+  max-lines:
+    description: Number of trailing log lines to publish.
+    required: false
+    default: '4000'
+
+runs:
+  using: composite
+  steps:
+    - name: Commit log
+      shell: bash
+      run: |
+        set -uo pipefail
+        SRC="${{ inputs.source }}"
+        NAME="${{ inputs.name }}"
+        MAX="${{ inputs.max-lines }}"
+        mkdir -p ci-logs
+        if [ -f "$SRC" ]; then
+          tail -n "$MAX" "$SRC" > "ci-logs/$NAME"
+        else
+          echo "log file $SRC was not produced" > "ci-logs/$NAME"
+        fi
+        git config user.name "apex-ci-bot"
+        git config user.email "actions@users.noreply.github.com"
+        git add -f ci-logs "$NAME" >/dev/null 2>&1 || true
+        git add -f ci-logs >/dev/null 2>&1 || true
+        if git diff --cached --quiet; then
+          echo "No log changes to publish."
+          exit 0
+        fi
+        git commit -m "ci: publish diagnostics [skip ci]" >/dev/null
+        git pull --rebase --autostash origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 || true
+        git push origin "HEAD:${GITHUB_REF_NAME}" || echo "log push failed (non-fatal)"

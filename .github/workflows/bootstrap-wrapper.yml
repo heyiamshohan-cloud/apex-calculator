@@ -7,6 +7,7 @@ on:
     paths:
       - 'gradle/wrapper/gradle-wrapper.jar'
       - '.github/workflows/bootstrap-wrapper.yml'
+      - '.github/actions/publish-log/action.yml'
   workflow_dispatch:
 
 permissions:
@@ -23,65 +24,57 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
-      - name: Check whether the wrapper already exists
-        id: check
-        run: |
-          if [ -f gradle/wrapper/gradle-wrapper.jar ]; then
-            echo "present=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "present=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Set up JDK 17
-        if: steps.check.outputs.present == 'false'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Install Gradle
-        if: steps.check.outputs.present == 'false'
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.9'
-
-      - name: Generate wrapper in a scratch directory
-        if: steps.check.outputs.present == 'false'
+      - name: Bootstrap wrapper
+        id: bootstrap
         run: |
-          set -euo pipefail
+          set -uo pipefail
+          LOG=/tmp/build.log
+          : > "$LOG"
+          exec > >(tee -a "$LOG") 2>&1
+          echo "== environment =="
+          java -version || true
+          if [ -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "wrapper already present"
+            echo "present=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "present=false" >> "$GITHUB_OUTPUT"
+          echo "== downloading gradle 8.9 =="
+          curl -fsSL -o /tmp/gradle.zip https://services.gradle.org/distributions/gradle-8.9-bin.zip || { echo "download failed"; exit 1; }
+          ls -la /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/gradle-dist
+          GRADLE_BIN=/tmp/gradle-dist/gradle-8.9/bin/gradle
+          "$GRADLE_BIN" --version
           mkdir -p /tmp/wrappergen
           cd /tmp/wrappergen
-          gradle wrapper --gradle-version 8.9 --distribution-type bin --no-daemon
-          ls -la
-          mkdir -p "$GITHUB_WORKSPACE/gradle/wrapper"
-          cp -v gradle/wrapper/gradle-wrapper.jar "$GITHUB_WORKSPACE/gradle/wrapper/"
-          cp -v gradle/wrapper/gradle-wrapper.properties "$GITHUB_WORKSPACE/gradle/wrapper/"
-          cp -v gradlew gradlew.bat "$GITHUB_WORKSPACE/"
-          chmod +x "$GITHUB_WORKSPACE/gradlew"
-
-      - name: Verify wrapper
-        if: steps.check.outputs.present == 'false'
-        run: |
-          set -euo pipefail
+          printf 'rootProject.name = "wrappergen"\n' > settings.gradle.kts
+          "$GRADLE_BIN" wrapper --gradle-version 8.9 --distribution-type bin --no-daemon
+          echo "== generated =="
+          find /tmp/wrappergen -maxdepth 3 -type f | sort
           cd "$GITHUB_WORKSPACE"
+          mkdir -p gradle/wrapper
+          cp -v /tmp/wrappergen/gradle/wrapper/gradle-wrapper.jar gradle/wrapper/
+          cp -v /tmp/wrappergen/gradle/wrapper/gradle-wrapper.properties gradle/wrapper/
+          cp -v /tmp/wrappergen/gradlew /tmp/wrappergen/gradlew.bat .
+          chmod +x gradlew
+          echo "== verifying wrapper (downloads distribution) =="
           ./gradlew --version
-
-      - name: Commit wrapper
-        if: steps.check.outputs.present == 'false'
-        run: |
-          set -euo pipefail
-          cd "$GITHUB_WORKSPACE"
+          echo "== committing =="
           git config user.name "apex-ci-bot"
           git config user.email "actions@users.noreply.github.com"
           git add -f gradle gradlew gradlew.bat
-          if git diff --cached --quiet; then
-            echo "Wrapper already committed; nothing to do."
-          else
-            git commit -m "chore: add Gradle wrapper 8.9 (generated on CI) [skip ci]"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
+          git commit -m "chore: add Gradle wrapper 8.9 (generated on CI) [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
-      - name: Emit base64 fallback of wrapper jar
-        if: steps.check.outputs.present == 'false'
-        run: |
-          base64 -w 0 gradle/wrapper/gradle-wrapper.jar | fold -w 500
+      - name: Publish diagnostic log
+        if: always()
+        uses: ./.github/actions/publish-log
+        with:
+          source: /tmp/build.log
+          name: bootstrap.log
