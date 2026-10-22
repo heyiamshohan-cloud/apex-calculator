@@ -27,10 +27,10 @@ Daemon will be stopped at the end of the build
 > Task :app:processDebugResources
 > Task :app:checkDebugDuplicateClasses
 > Task :app:kspDebugKotlin
+> Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
 > Task :app:mergeLibDexDebug
 > Task :app:mergeDebugNativeLibs
-> Task :app:mergeExtDexDebug
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
@@ -40,109 +40,82 @@ Daemon will be stopped at the end of the build
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
 
 > Task :app:javaPreCompileDebugUnitTest
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/math/Rational.kt:13:21 Non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
 
-> Task :app:compileDebugKotlin FAILED
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:310:26 None of the following candidates is applicable:
-fun Double.pow(x: Double): Double
-fun Double.pow(n: Int): Double
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:332:63 None of the following candidates is applicable:
-fun Double.pow(x: Double): Double
-fun Double.pow(n: Int): Double
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:332:70 Overload resolution ambiguity between candidates:
-fun <T> Iterable<T>.minus(element: T): List<T>
-fun <K, V> Map<out K, V>.minus(key: K): Map<K, V>
-fun <T> Set<T>.minus(element: T): Set<T>
-fun <T> Sequence<T>.minus(element: T): Sequence<T>
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:332:75 None of the following candidates is applicable:
-fun BigDecimal.div(other: BigDecimal): BigDecimal
-fun BigInteger.div(other: BigInteger): BigInteger
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:131:75 Unresolved reference 'parsedDecimal'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:511:40 Unresolved reference 'parsedDecimal'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:512:41 Unresolved reference 'parsedDecimal'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/AboutScreen.kt:56:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/AboutScreen.kt:56:89 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/AboutScreen.kt:57:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/PrivacyScreen.kt:46:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/PrivacyScreen.kt:46:116 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/PrivacyScreen.kt:47:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:34:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:38:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:40:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:54:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:58:50 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:58:106 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:59:61 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:80:46 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:85:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:91:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:105:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:106:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:61:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:72:21 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:81:21 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:91:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:92:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:68:9 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:68:64 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:69:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:109:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:114:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:120:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:136:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:137:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:59:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:64:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:66:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:67:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:101:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:106:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:115:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:116:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:110:5 Overload resolution ambiguity between candidates:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:115:13 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:125:9 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:126:9 @Composable invocations can only happen from the context of a @Composable function
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/navigation/NavigationScaffolds.kt:13:1 Conflicting overloads:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/navigation/SecondaryScaffold.kt:11:1 Conflicting overloads:
-fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+The generated 'copy()' will change its visibility in future releases.
+
+To suppress the warning do one of the following:
+- Annotate the data class with the '@ConsistentCopyVisibility' annotation.
+- Use the '-Xconsistent-data-class-copy-visibility' compiler flag.
+- Annotate the data class with the '@ExposedCopyVisibility' annotation 
+  (Discouraged, but can be used to keep binary compatibility).
+
+To learn more, see the documentation of the '@ConsistentCopyVisibility' and '@ExposedCopyVisibility' annotations.
+
+This will become an error in Kotlin 2.1.
+w: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryViewModel.kt:59:33 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+
+> Task :app:compileDebugJavaWithJavac
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:kspDebugUnitTestKotlin
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:compileDebugUnitTestKotlin
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+
+> Task :app:testDebugUnitTest
+
+ExpressionEngineTest > decimal arithmetic is exact FAILED
+    org.junit.ComparisonFailure at ExpressionEngineTest.kt:142
+
+ExpressionEngineTest > powers are right associative and unary minus binds looser FAILED
+    java.lang.AssertionError at ExpressionEngineTest.kt:68
+
+FractionsTest > rejects malformed input FAILED
+    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:99
+
+FractionsTest > division by zero is rejected FAILED
+    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:60
+
+NumericalTest > degree mode is respected by the engine functions FAILED
+    java.lang.AssertionError at NumericalAndDateTest.kt:72
+
+ProbabilityTest > combinations and permutations FAILED
+    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:268
+
+ProbabilityTest > invalid probability arguments are rejected FAILED
+    com.shohankhan.apexcalculator.core.math.MathEvalException at FractionsAndStatisticsTest.kt:293
+
+ProgrammerTest > arithmetic wraps inside the selected width FAILED
+    java.lang.AssertionError at ProgrammerAndMatrixTest.kt:76
+
+ProgrammerTest > radix formatting FAILED
+    org.junit.ComparisonFailure at ProgrammerAndMatrixTest.kt:27
+
+108 tests completed, 9 failed
+
+> Task :app:testDebugUnitTest FAILED
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':app:compileDebugKotlin'.
-> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-   > Compilation error. See log for more details
+Execution failed for task ':app:testDebugUnitTest'.
+> There were failing tests. See the report at: file:///home/runner/work/apex-calculator/apex-calculator/app/build/reports/tests/testDebugUnitTest/index.html
 
 * Try:
-> Run with --info or --debug option to get more log output.
 > Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
 
 * Exception is:
-org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:compileDebugKotlin'.
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:testDebugUnitTest'.
 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:130)
 	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:293)
 	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:128)
@@ -174,18 +147,20 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:com
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
-Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionException: A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-	at org.gradle.workers.internal.DefaultWorkerExecutor$WorkItemExecution.waitForCompletion(DefaultWorkerExecutor.java:287)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.lambda$waitForItemsAndGatherFailures$2(DefaultAsyncWorkTracker.java:130)
-	at org.gradle.internal.Factories$1.create(Factories.java:31)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks(DefaultWorkerLeaseService.java:339)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks(DefaultWorkerLeaseService.java:322)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLock(DefaultWorkerLeaseService.java:327)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:126)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:92)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForAll(DefaultAsyncWorkTracker.java:78)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForCompletion(DefaultAsyncWorkTracker.java:66)
-	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:252)
+Caused by: org.gradle.api.internal.exceptions.MarkedVerificationException: There were failing tests. See the report at: file:///home/runner/work/apex-calculator/apex-calculator/app/build/reports/tests/testDebugUnitTest/index.html
+	at org.gradle.api.tasks.testing.AbstractTestTask.handleTestFailures(AbstractTestTask.java:705)
+	at org.gradle.api.tasks.testing.AbstractTestTask.handleCollectedResults(AbstractTestTask.java:539)
+	at org.gradle.api.tasks.testing.AbstractTestTask.executeTests(AbstractTestTask.java:534)
+	at org.gradle.api.tasks.testing.Test.executeTests(Test.java:715)
+	at com.android.build.gradle.tasks.factory.AndroidUnitTest.executeTests(AndroidUnitTest.java:170)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.doExecute(StandardTaskAction.java:58)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:244)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
 	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
@@ -303,38 +278,7 @@ Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionExcept
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
-Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
-	at org.jetbrains.kotlin.gradle.tasks.TasksUtilsKt.throwExceptionIfCompilationFailed(tasksUtils.kt:21)
-	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.run(GradleKotlinCompilerWork.kt:119)
-	at org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction.execute(GradleCompilerRunnerWithWorkers.kt:76)
-	at org.gradle.workers.internal.DefaultWorkerServer.execute(DefaultWorkerServer.java:63)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:66)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:62)
-	at org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader(ClassLoaderUtils.java:100)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.lambda$execute$0(NoIsolationWorkerFactory.java:62)
-	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:44)
-	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:41)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation(AbstractWorker.java:41)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute(NoIsolationWorkerFactory.java:59)
-	at org.gradle.workers.internal.DefaultWorkerExecutor.lambda$submitWork$0(DefaultWorkerExecutor.java:174)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution(DefaultConditionalExecutionQueue.java:195)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.access$700(DefaultConditionalExecutionQueue.java:128)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner$1.run(DefaultConditionalExecutionQueue.java:170)
-	at org.gradle.internal.Factories$1.create(Factories.java:31)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:267)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:131)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:136)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch(DefaultConditionalExecutionQueue.java:165)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run(DefaultConditionalExecutionQueue.java:134)
-	... 2 more
 
 
-BUILD FAILED in 1m 53s
-31 actionable tasks: 31 executed
+BUILD FAILED in 3m 16s
+45 actionable tasks: 45 executed
