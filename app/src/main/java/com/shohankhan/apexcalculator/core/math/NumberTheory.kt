@@ -12,21 +12,32 @@ object NumberTheory {
 
     fun gcd(a: BigInteger, b: BigInteger): BigInteger = a.gcd(b)
 
+    /** Integer square root that works on every supported Android level (BigInteger.sqrt is API 33). */
+    internal fun BigInteger.integerSquareRoot(): BigInteger {
+        if (this < BigInteger.valueOf(2)) return this
+        var estimate = BigInteger.ONE.shiftLeft((bitLength() + 1) / 2)
+        while (true) {
+            val next = estimate.add(this.divide(estimate)).shiftRight(1)
+            if (next >= estimate) return estimate
+            estimate = next
+        }
+    }
+
     fun lcm(a: BigInteger, b: BigInteger): BigInteger =
         if (a.signum() == 0 || b.signum() == 0) BigInteger.ZERO else a.divide(a.gcd(b)).multiply(b).abs()
 
     fun isPrime(value: BigInteger): Boolean {
-        if (value < BigInteger.TWO) return false
+        if (value < BigInteger.valueOf(2)) return false
         if (value > MAX_FACTOR_INPUT) {
             throw MathEvalException(MathError.Limit("Prime testing is limited to values up to $MAX_FACTOR_INPUT"))
         }
-        if (value == BigInteger.TWO) return true
-        if (value.mod(BigInteger.TWO) == BigInteger.ZERO) return false
-        val limit = value.sqrt()
+        if (value == BigInteger.valueOf(2)) return true
+        if (value.mod(BigInteger.valueOf(2)) == BigInteger.ZERO) return false
+        val limit = value.integerSquareRoot()
         var factor = BigInteger.valueOf(3)
         while (factor <= limit) {
             if (value.mod(factor) == BigInteger.ZERO) return false
-            factor = factor.add(BigInteger.TWO)
+            factor = factor.add(BigInteger.valueOf(2))
         }
         return true
     }
@@ -43,7 +54,7 @@ object NumberTheory {
         }
         var remaining = value
         val factors = ArrayList<Pair<BigInteger, Int>>()
-        var divisor = BigInteger.TWO
+        var divisor = BigInteger.valueOf(2)
         while (divisor.multiply(divisor) <= remaining) {
             if (remaining.mod(divisor) == BigInteger.ZERO) {
                 var exponent = 0
@@ -53,7 +64,7 @@ object NumberTheory {
                 }
                 factors += divisor to exponent
             }
-            divisor = if (divisor == BigInteger.TWO) BigInteger.valueOf(3) else divisor.add(BigInteger.TWO)
+            divisor = if (divisor == BigInteger.valueOf(2)) BigInteger.valueOf(3) else divisor.add(BigInteger.valueOf(2))
         }
         if (remaining > BigInteger.ONE) factors += remaining to 1
         return factors
@@ -85,20 +96,20 @@ object NumberTheory {
     }
 
     fun divisibilityChecks(value: BigInteger): Map<Int, Boolean> = mapOf(
-        2 to (value.mod(BigInteger.TWO) == BigInteger.ZERO),
+        2 to (value.mod(BigInteger.valueOf(2)) == BigInteger.ZERO),
         3 to (value.mod(BigInteger.valueOf(3)) == BigInteger.ZERO),
         4 to (value.mod(BigInteger.valueOf(4)) == BigInteger.ZERO),
         5 to (value.mod(BigInteger.valueOf(5)) == BigInteger.ZERO),
         6 to (value.mod(BigInteger.valueOf(6)) == BigInteger.ZERO),
         8 to (value.mod(BigInteger.valueOf(8)) == BigInteger.ZERO),
         9 to (value.mod(BigInteger.valueOf(9)) == BigInteger.ZERO),
-        10 to (value.mod(BigInteger.TEN) == BigInteger.ZERO),
+        10 to (value.mod(BigInteger.valueOf(10)) == BigInteger.ZERO),
         11 to (value.mod(BigInteger.valueOf(11)) == BigInteger.ZERO),
     )
 
     fun isPerfectSquare(value: BigInteger): Boolean {
         if (value.signum() < 0) return false
-        val root = value.sqrt()
+        val root = value.integerSquareRoot()
         return root.multiply(root) == value
     }
 

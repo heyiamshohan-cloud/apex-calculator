@@ -102,7 +102,7 @@ data class Rational private constructor(
         if (isInteger) numerator.toString() else "$numerator/$denominator"
 
     companion object {
-        private val TWO = BigInteger.TWO
+        private val TWO = BigInteger.valueOf(2)
         private val FIVE = BigInteger.valueOf(5)
         const val MAX_EXPONENT = 4096
 
@@ -135,7 +135,7 @@ data class Rational private constructor(
             return if (scale <= 0) {
                 of(value.toBigIntegerExact())
             } else {
-                of(value.unscaledValue(), BigInteger.TEN.pow(scale))
+                of(value.unscaledValue(), BigInteger.valueOf(10).pow(scale))
             }
         }
     }
