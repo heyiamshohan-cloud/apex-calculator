@@ -42,5 +42,13 @@ runs:
           exit 0
         fi
         git commit -m "ci: publish diagnostics [skip ci]" >/dev/null
-        git pull --rebase --autostash origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 || true
-        git push origin "HEAD:${GITHUB_REF_NAME}" || echo "log push failed (non-fatal)"
+        for attempt in 1 2 3; do
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 || true
+          if git push origin "HEAD:${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            echo "log published on attempt ${attempt}"
+            exit 0
+          fi
+          sleep 5
+        done
+        echo "log push failed (non-fatal)"
+        exit 0

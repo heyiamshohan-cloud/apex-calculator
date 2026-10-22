@@ -71,6 +71,15 @@ jobs:
           source: /tmp/build.log
           name: ci-build.log
 
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: /tmp/build.log
+          if-no-files-found: ignore
+          retention-days: 5
+
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
