@@ -10,10 +10,10 @@ Daemon will be stopped at the end of the build
 > Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
-> Task :app:mergeDebugResources
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:parseDebugLocalResources
+> Task :app:mergeDebugResources
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
 > Task :app:processDebugManifestForPackage
@@ -72,65 +72,15 @@ w: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/co
 > Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
 > Task :app:processDebugUnitTestJavaRes
 
-> Task :app:testDebugUnitTest FAILED
-
-ExpressionEngineTest > decimal arithmetic is exact FAILED
-    org.junit.ComparisonFailure: expected:<1[]024> but was:<1[,]024>
-        at org.junit.Assert.assertEquals(Assert.java:117)
-        at org.junit.Assert.assertEquals(Assert.java:146)
-        at com.shohankhan.apexcalculator.core.math.ExpressionEngineTest.decimal arithmetic is exact(ExpressionEngineTest.kt:142)
-
-ExpressionEngineTest > powers are right associative and unary minus binds looser FAILED
-    java.lang.AssertionError: expected:<0.5> but was:<2.0>
-        at org.junit.Assert.fail(Assert.java:89)
-        at org.junit.Assert.failNotEquals(Assert.java:835)
-        at org.junit.Assert.assertEquals(Assert.java:555)
-        at org.junit.Assert.assertEquals(Assert.java:685)
-        at com.shohankhan.apexcalculator.core.math.ExpressionEngineTest.powers are right associative and unary minus binds looser(ExpressionEngineTest.kt:68)
-
-FractionsTest > rejects malformed input FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException: Enter a fraction
-        at app//com.shohankhan.apexcalculator.core.math.Fractions.parse(Fractions.kt:26)
-        at app//com.shohankhan.apexcalculator.core.math.FractionsTest.rejects malformed input(FractionsAndStatisticsTest.kt:99)
-
-FractionsTest > division by zero is rejected FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException: Division by zero is undefined
-        at app//com.shohankhan.apexcalculator.core.math.Rational.div(Rational.kt:34)
-        at app//com.shohankhan.apexcalculator.core.math.FractionsTest.division by zero is rejected(FractionsAndStatisticsTest.kt:60)
-
-NumericalTest > degree mode is respected by the engine functions FAILED
-    java.lang.AssertionError: expected:<0.5> but was:<0.8660254037872587>
-        at org.junit.Assert.fail(Assert.java:89)
-        at org.junit.Assert.failNotEquals(Assert.java:835)
-        at org.junit.Assert.assertEquals(Assert.java:555)
-        at org.junit.Assert.assertEquals(Assert.java:685)
-        at com.shohankhan.apexcalculator.core.math.NumericalTest.degree mode is respected by the engine functions(NumericalAndDateTest.kt:72)
-
-ProbabilityTest > combinations and permutations FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException: r cannot be greater than n
-        at app//com.shohankhan.apexcalculator.core.math.Probability.combinations(Probability.kt:26)
-        at app//com.shohankhan.apexcalculator.core.math.ProbabilityTest.combinations and permutations(FractionsAndStatisticsTest.kt:268)
+> Task :app:testDebugUnitTest
 
 ProbabilityTest > invalid probability arguments are rejected FAILED
-    com.shohankhan.apexcalculator.core.math.MathEvalException: Probability must be between 0 and 1
-        at app//com.shohankhan.apexcalculator.core.math.Probability.requireProbability(Probability.kt:38)
-        at app//com.shohankhan.apexcalculator.core.math.Probability.requireProbability$default(Probability.kt:36)
-        at app//com.shohankhan.apexcalculator.core.math.ProbabilityTest.invalid probability arguments are rejected(FractionsAndStatisticsTest.kt:293)
+    java.lang.AssertionError: Expected rejection for NaN
+        at com.shohankhan.apexcalculator.core.math.ProbabilityTest.invalid probability arguments are rejected(FractionsAndStatisticsTest.kt:297)
 
-ProgrammerTest > arithmetic wraps inside the selected width FAILED
-    java.lang.AssertionError
-        at org.junit.Assert.fail(Assert.java:87)
-        at org.junit.Assert.assertTrue(Assert.java:42)
-        at org.junit.Assert.assertTrue(Assert.java:53)
-        at com.shohankhan.apexcalculator.core.math.ProgrammerTest.arithmetic wraps inside the selected width(ProgrammerAndMatrixTest.kt:76)
+108 tests completed, 1 failed
 
-ProgrammerTest > radix formatting FAILED
-    org.junit.ComparisonFailure: expected:<[]1010> but was:<[0000000000000000000000000000]1010>
-        at org.junit.Assert.assertEquals(Assert.java:117)
-        at org.junit.Assert.assertEquals(Assert.java:146)
-        at com.shohankhan.apexcalculator.core.math.ProgrammerTest.radix formatting(ProgrammerAndMatrixTest.kt:27)
-
-108 tests completed, 9 failed
+> Task :app:testDebugUnitTest FAILED
 
 FAILURE: Build failed with an exception.
 
@@ -172,6 +122,35 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:tes
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:267)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:131)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
+	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
 Caused by: org.gradle.api.internal.exceptions.MarkedVerificationException: There were failing tests. See the report at: file:///home/runner/work/apex-calculator/apex-calculator/app/build/reports/tests/testDebugUnitTest/index.html
@@ -303,9 +282,38 @@ Caused by: org.gradle.api.internal.exceptions.MarkedVerificationException: There
 	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:459)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:376)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:111)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.executeWithServices(DefaultTaskExecutionGraph.java:138)
+	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph.execute(DefaultTaskExecutionGraph.java:123)
+	at org.gradle.execution.SelectedTaskExecutionAction.execute(SelectedTaskExecutionAction.java:35)
+	at org.gradle.execution.DryRunBuildExecutionAction.execute(DryRunBuildExecutionAction.java:51)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:54)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor$ExecuteTasks.call(BuildOperationFiringBuildWorkerExecutor.java:43)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:209)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:204)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:166)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
+	at org.gradle.execution.BuildOperationFiringBuildWorkerExecutor.execute(BuildOperationFiringBuildWorkerExecutor.java:40)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$10(DefaultBuildLifecycleController.java:313)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:266)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$8(StateTransitionController.java:177)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:44)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:177)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:304)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:220)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:267)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:131)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:181)
+	at org.gradle.composite.internal.DefaultBuildController.access$000(DefaultBuildController.java:50)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:198)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:198)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:48)
 
 
-BUILD FAILED in 2m 17s
+BUILD FAILED in 3m 20s
 45 actionable tasks: 45 executed
