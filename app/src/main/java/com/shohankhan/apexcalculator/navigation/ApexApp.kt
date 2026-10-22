@@ -3,12 +3,13 @@ package com.shohankhan.apexcalculator.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.navigation.NavType
 import com.shohankhan.apexcalculator.core.domain.model.ApexTab
+import com.shohankhan.apexcalculator.core.domain.model.CalculationSource
 import com.shohankhan.apexcalculator.feature.about.AboutScreen
 import com.shohankhan.apexcalculator.feature.about.PrivacyScreen
 import com.shohankhan.apexcalculator.feature.favorites.FavoritesScreen
@@ -16,15 +17,14 @@ import com.shohankhan.apexcalculator.feature.formula.FormulaDetailScreen
 import com.shohankhan.apexcalculator.feature.formula.FormulaLabScreen
 import com.shohankhan.apexcalculator.feature.history.HistoryScreen
 import com.shohankhan.apexcalculator.feature.programmer.ProgrammerScreen
+import com.shohankhan.apexcalculator.feature.quicksolve.QuickSolveCatalogScreen
+import com.shohankhan.apexcalculator.feature.quicksolve.SolverScreen
 import com.shohankhan.apexcalculator.feature.scientific.ScientificScreen
 import com.shohankhan.apexcalculator.feature.settings.SettingsScreen
-import com.shohankhan.apexcalculator.feature.solver.QuickSolveScreen
-import com.shohankhan.apexcalculator.feature.solver.SolverScreen
 import com.shohankhan.apexcalculator.feature.standard.StandardScreen
-import com.shohankhan.apexcalculator.feature.tools.ComplexWorkspaceScreen
-import com.shohankhan.apexcalculator.feature.tools.MathToolsScreen
-import com.shohankhan.apexcalculator.feature.tools.MatrixWorkspaceScreen
-import com.shohankhan.apexcalculator.feature.tools.ToolCategoryScreen
+import com.shohankhan.apexcalculator.feature.tools.ComplexScreen
+import com.shohankhan.apexcalculator.feature.tools.MatrixScreen
+import com.shohankhan.apexcalculator.feature.tools.ToolsHubScreen
 
 /** Central route table. Tab routes are the same strings stored in [ApexTab.route]. */
 object ApexRoutes {
@@ -37,13 +37,13 @@ object ApexRoutes {
     const val COMPLEX = "tools/complex"
     const val FORMULA_DETAIL = "formula/{formulaId}"
     const val SOLVER_DETAIL = "solver/{solverId}"
-    const val TOOL_CATEGORY = "tools/category/{categoryName}"
+    const val TOOL_SOLVER = "tool/{solverId}"
 
     fun formula(id: String) = "formula/$id"
 
     fun solver(id: String) = "solver/$id"
 
-    fun toolCategory(name: String) = "tools/category/$name"
+    fun toolSolver(id: String) = "tool/$id"
 }
 
 @Composable
@@ -104,7 +104,7 @@ fun ApexApp(
             )
         }
         composable(ApexTab.QUICKSOLVE.route) {
-            QuickSolveScreen(
+            QuickSolveCatalogScreen(
                 onOpenSolver = { id -> openSecondary(ApexRoutes.solver(id)) },
                 onNavigate = ::goToTab,
                 onOpenHistory = { openSecondary(ApexRoutes.HISTORY) },
@@ -125,11 +125,10 @@ fun ApexApp(
             )
         }
         composable(ApexTab.TOOLS.route) {
-            MathToolsScreen(
-                onOpenSolver = { id -> openSecondary(ApexRoutes.solver(id)) },
+            ToolsHubScreen(
+                onOpenSolver = { id -> openSecondary(ApexRoutes.toolSolver(id)) },
                 onOpenMatrix = { openSecondary(ApexRoutes.MATRIX) },
                 onOpenComplex = { openSecondary(ApexRoutes.COMPLEX) },
-                onOpenCategory = { name -> openSecondary(ApexRoutes.toolCategory(name)) },
                 onNavigate = ::goToTab,
                 onOpenHistory = { openSecondary(ApexRoutes.HISTORY) },
                 onOpenFavorites = { openSecondary(ApexRoutes.FAVORITES) },
@@ -173,10 +172,10 @@ fun ApexApp(
             PrivacyScreen(onBack = ::back)
         }
         composable(ApexRoutes.MATRIX) {
-            MatrixWorkspaceScreen(onBack = ::back)
+            MatrixScreen(onBack = ::back)
         }
         composable(ApexRoutes.COMPLEX) {
-            ComplexWorkspaceScreen(onBack = ::back)
+            ComplexScreen(onBack = ::back)
         }
         composable(
             route = ApexRoutes.FORMULA_DETAIL,
@@ -193,16 +192,17 @@ fun ApexApp(
         ) { entry ->
             SolverScreen(
                 solverId = entry.arguments?.getString("solverId").orEmpty(),
+                source = CalculationSource.QUICK_SOLVE,
                 onBack = ::back,
             )
         }
         composable(
-            route = ApexRoutes.TOOL_CATEGORY,
-            arguments = listOf(navArgument("categoryName") { type = NavType.StringType }),
+            route = ApexRoutes.TOOL_SOLVER,
+            arguments = listOf(navArgument("solverId") { type = NavType.StringType }),
         ) { entry ->
-            ToolCategoryScreen(
-                categoryName = entry.arguments?.getString("categoryName").orEmpty(),
-                onOpenSolver = { id -> openSecondary(ApexRoutes.solver(id)) },
+            SolverScreen(
+                solverId = entry.arguments?.getString("solverId").orEmpty(),
+                source = CalculationSource.TOOLS,
                 onBack = ::back,
             )
         }

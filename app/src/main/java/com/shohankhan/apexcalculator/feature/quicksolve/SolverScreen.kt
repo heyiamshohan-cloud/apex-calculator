@@ -56,11 +56,13 @@ private sealed interface SolverState {
 fun SolverScreen(
     solverId: String,
     source: CalculationSource,
-    angleUnit: String,
     onBack: () -> Unit,
     sessionViewModel: SessionViewModel = viewModel(),
     catalogViewModel: CatalogViewModel = viewModel(),
+    settingsViewModel: com.shohankhan.apexcalculator.core.ui.SettingsStateViewModel = viewModel(),
 ) {
+    val settings by settingsViewModel.settings.collectAsStateWithLifecycle()
+    val angleUnit = settings.angleMode.name
     val spec = remember(solverId) { SolverCatalog.find(solverId) }
     if (spec == null) {
         SecondaryScaffold(title = "Solver", onBack = onBack) { padding ->

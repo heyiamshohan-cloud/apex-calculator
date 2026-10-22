@@ -29,16 +29,14 @@ import com.shohankhan.apexcalculator.core.domain.model.FavoriteKind
 import com.shohankhan.apexcalculator.core.domain.solver.SolverCatalog
 import com.shohankhan.apexcalculator.core.ui.CatalogRow
 import com.shohankhan.apexcalculator.core.ui.CatalogViewModel
-import com.shohankhan.apexcalculator.core.ui.SearchBar
 import com.shohankhan.apexcalculator.navigation.TabScaffold
 
-/** Entry point of the Math Tools tab: workspaces first, then the individual solvers. */
+/** Math Tools hub: dedicated workspaces plus every solver that is not part of Quick Solve. */
 @Composable
-fun MathToolsScreen(
+fun ToolsHubScreen(
     onOpenSolver: (String) -> Unit,
     onOpenMatrix: () -> Unit,
     onOpenComplex: () -> Unit,
-    onOpenCategory: (String) -> Unit,
     onNavigate: (ApexTab) -> Unit,
     onOpenHistory: () -> Unit,
     onOpenFavorites: () -> Unit,
@@ -50,9 +48,8 @@ fun MathToolsScreen(
     val favorites by catalogViewModel.favorites.collectAsStateWithLifecycle()
     var query by rememberSaveable { mutableStateOf("") }
     val colors = MaterialTheme.apexColors
-    val tools = SolverCatalog.mathTools
+    val tools = remember { SolverCatalog.mathTools }
     val results = remember(query, tools) { SolverCatalog.search(query, tools) }
-    val showWorkspaces = query.isBlank()
 
     TabScaffold(
         tab = ApexTab.TOOLS,
@@ -73,21 +70,22 @@ fun MathToolsScreen(
             verticalArrangement = Arrangement.spacedBy(ApexSpacing.sm),
         ) {
             item {
-                SearchBar(query = query, onQueryChange = { query = it }, placeholder = "Search tools")
+                com.shohankhan.apexcalculator.core.designsystem.ApexTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    label = "Search tools",
+                    singleLine = true,
+                )
                 Spacer(Modifier.height(ApexSpacing.md))
             }
-            if (showWorkspaces) {
+            if (query.isBlank()) {
                 item {
                     ApexCard {
                         Column {
-                            Text(
-                                text = "Workspaces",
-                                style = MaterialTheme.typography.titleSmall,
-                                color = colors.textPrimary,
-                            )
+                            Text("Workspaces", style = MaterialTheme.typography.titleSmall, color = colors.textPrimary)
                             Spacer(Modifier.height(ApexSpacing.xs))
                             Text(
-                                text = "Interactive tools that keep their own state while you switch tabs.",
+                                text = "Interactive tools with their own state: matrices, complex arithmetic and the full solver set.",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = colors.textSecondary,
                             )
@@ -97,15 +95,15 @@ fun MathToolsScreen(
                 item {
                     CatalogRow(
                         title = "Matrix calculator",
-                        subtitle = "Determinant, inverse, RREF, rank, multiply and linear systems up to 8×8.",
+                        subtitle = "Determinant, inverse, RREF, rank, transpose and linear systems up to 8×8.",
                         icon = ApexIcons.Grid,
                         onClick = onOpenMatrix,
                     )
                 }
                 item {
                     CatalogRow(
-                        title = "Complex number workspace",
-                        subtitle = "Evaluate expressions, convert to polar form and inspect modulus and argument.",
+                        title = "Complex numbers",
+                        subtitle = "Add, subtract, multiply, divide and raise complex numbers; see modulus, argument and polar form.",
                         icon = ApexIcons.Scientific,
                         onClick = onOpenComplex,
                     )
@@ -113,39 +111,47 @@ fun MathToolsScreen(
                 item {
                     CatalogRow(
                         title = "Statistics workspace",
-                        subtitle = "Full descriptive report for a dataset: centre, spread, quartiles and outliers.",
+                        subtitle = "Mean, median, mode, spread, quartiles and outliers for any data set.",
                         icon = ApexIcons.Sigma,
                         onClick = { onOpenSolver("dataset_summary") },
                     )
                 }
                 item {
                     CatalogRow(
-                        title = "Date & time tools",
-                        subtitle = "Day differences, weekday counts, date shifts and durations.",
-                        icon = ApexIcons.Calendar,
-                        onClick = { onOpenCategory("DATE_TIME") },
-                    )
-                }
-                item {
-                    CatalogRow(
-                        title = "Probability tools",
-                        subtitle = "Binomial, combinations, permutations and conditional probability.",
+                        title = "Probability",
+                        subtitle = "Permutations, combinations, binomial distribution and event algebra.",
                         icon = ApexIcons.Percent,
-                        onClick = { onOpenCategory("PROBABILITY") },
+                        onClick = { onOpenSolver("binomial_solver") },
                     )
                 }
                 item {
                     CatalogRow(
                         title = "Sequences & summations",
-                        subtitle = "Arithmetic and geometric progressions, sums and term generation.",
+                        subtitle = "Arithmetic and geometric progressions, infinite sums and Fibonacci numbers.",
                         icon = ApexIcons.Tools,
-                        onClick = { onOpenCategory("SEQUENCES") },
+                        onClick = { onOpenSolver("sequence_arithmetic_sum") },
+                    )
+                }
+                item {
+                    CatalogRow(
+                        title = "Date & time",
+                        subtitle = "Differences, weekday counts, date shifting and durations — fully offline.",
+                        icon = ApexIcons.Calendar,
+                        onClick = { onOpenSolver("days_between") },
+                    )
+                }
+                item {
+                    CatalogRow(
+                        title = "Numerical calculus",
+                        subtitle = "Derivatives, definite integrals, root finding and function tables.",
+                        icon = ApexIcons.QuickSolve,
+                        onClick = { onOpenSolver("derivative_point") },
                     )
                 }
                 item {
                     Spacer(Modifier.height(ApexSpacing.sm))
                     Text(
-                        text = "All solvers",
+                        text = "All tools (${tools.size})",
                         style = MaterialTheme.typography.titleSmall,
                         color = colors.textPrimary,
                         modifier = Modifier.padding(vertical = ApexSpacing.xs),
