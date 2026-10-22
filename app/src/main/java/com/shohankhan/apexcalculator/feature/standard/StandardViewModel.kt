@@ -10,6 +10,7 @@ import com.shohankhan.apexcalculator.core.domain.model.AppSettings
 import com.shohankhan.apexcalculator.core.domain.model.CalculationSource
 import com.shohankhan.apexcalculator.core.domain.model.HistoryRecord
 import com.shohankhan.apexcalculator.core.domain.model.MemoryState
+import com.shohankhan.apexcalculator.core.domain.ExpressionHandoff
 import com.shohankhan.apexcalculator.core.domain.toEvalOptions
 import com.shohankhan.apexcalculator.core.domain.toFormatSettings
 import com.shohankhan.apexcalculator.core.math.CalculatorEngine
@@ -70,6 +71,20 @@ class StandardViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             container.historyRepository.observe().collect { records ->
                 _state.update { it.copy(previous = records.firstOrNull()) }
+            }
+        }
+        viewModelScope.launch {
+            ExpressionHandoff.pending.collect { expression ->
+                if (expression != null) {
+                    _state.update {
+                        it.copy(
+                            expression = TextFieldValue(expression, TextRange(expression.length)),
+                            committed = null,
+                            justEvaluated = false,
+                        ).recalculated()
+                    }
+                    ExpressionHandoff.clear()
+                }
             }
         }
     }

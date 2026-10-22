@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.shohankhan.apexcalculator.core.designsystem.ApexTheme
 import com.shohankhan.apexcalculator.core.domain.model.AppSettings
-import com.shohankhan.apexcalculator.feature.standard.StandardScreen
+import com.shohankhan.apexcalculator.navigation.ApexApp
 
 class MainActivity : ComponentActivity() {
 
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             val settings by container.settingsRepository.settings
                 .collectAsStateWithLifecycle(initialValue = AppSettings())
             ApexTheme(themeMode = settings.themeMode, accent = settings.accent) {
-                StandardScreen()
+                ApexApp()
             }
         }
     }

@@ -32,21 +32,25 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.shohankhan.apexcalculator.core.designsystem.ApexIcons
-import com.shohankhan.apexcalculator.core.designsystem.ApexScreen
 import com.shohankhan.apexcalculator.core.designsystem.ApexSpacing
 import com.shohankhan.apexcalculator.core.designsystem.IconAction
 import com.shohankhan.apexcalculator.core.designsystem.KeyButton
 import com.shohankhan.apexcalculator.core.designsystem.KeyStyle
 import com.shohankhan.apexcalculator.core.designsystem.apexColors
+import com.shohankhan.apexcalculator.core.domain.model.ApexTab
 import com.shohankhan.apexcalculator.core.domain.toFormatSettings
+import com.shohankhan.apexcalculator.navigation.TabScaffold
 import androidx.compose.ui.text.input.TextFieldValue
 
 @Composable
 fun StandardScreen(
     viewModel: StandardViewModel = viewModel(),
+    onNavigate: (ApexTab) -> Unit = {},
     onOpenHistory: () -> Unit = {},
     onOpenFavorites: () -> Unit = {},
     onOpenSettings: () -> Unit = {},
+    onOpenAbout: () -> Unit = {},
+    onOpenPrivacy: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val colors = MaterialTheme.apexColors
@@ -59,13 +63,27 @@ fun StandardScreen(
     val secondary = displayValue?.let { formatter.secondary(it) }
     val clipboard = LocalClipboardManager.current
 
-    ApexScreen(
-        title = "Standard",
+    TabScaffold(
+        tab = ApexTab.STANDARD,
+        onNavigate = onNavigate,
+        onOpenHistory = onOpenHistory,
+        onOpenFavorites = onOpenFavorites,
+        onOpenSettings = onOpenSettings,
+        onOpenAbout = onOpenAbout,
+        onOpenPrivacy = onOpenPrivacy,
         subtitle = "APEX Calculator",
         actions = {
-            IconAction(ApexIcons.History, "Calculation history", onOpenHistory)
-            IconAction(ApexIcons.StarOutline, "Favorites", onOpenFavorites)
-            IconAction(ApexIcons.Settings, "Settings", onOpenSettings)
+            IconAction(
+                icon = ApexIcons.Copy,
+                description = "Copy",
+                onClick = {
+                    val text = when {
+                        displayText.isNotBlank() -> displayText
+                        else -> state.expression.text
+                    }
+                    if (text.isNotBlank()) clipboard.setText(AnnotatedString(text))
+                },
+            )
         },
     ) { padding ->
         BoxWithConstraints(
