@@ -15,7 +15,7 @@ import kotlin.math.PI
 import kotlin.math.abs
 import kotlin.math.sqrt
 
-private fun Map<String, String>.angleUnit(): AngleUnit =
+internal fun Map<String, String>.angleUnit(): AngleUnit =
     if (this["__angle"] == AngleUnit.RAD.name) AngleUnit.RAD else AngleUnit.DEG
 
 internal fun algebraSolvers(): List<SolverSpec> = listOf(
@@ -385,7 +385,7 @@ internal fun sequenceSolvers(): List<SolverSpec> = listOf(
             headlineLabel = "F($n)",
             rows = listOf(
                 "Sequence" to values.joinToString(", "),
-                "Golden ratio limit" to fmt(if (n >= 2) values[n - 1].toDouble() / values[n - 2] else 0.0),
+                "Golden ratio limit" to fmt(if (values.size >= 2) values.last().toDouble() / values[values.size - 2] else 0.0),
             ),
         )
     },

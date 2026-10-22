@@ -24,7 +24,7 @@ internal fun fractionSolvers(): List<SolverSpec> = listOf(
                 "Decimal" to decimalText(value),
             ),
             steps = listOf(
-                "Numerator and denominator share a factor of ${abs(value.numerator.gcd(value.denominator))}",
+                "Numerator and denominator share a factor of ${value.numerator.gcd(value.denominator)}",
                 "Divide both terms by the greatest common divisor",
             ),
         )
