@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- APEX mark: a geometric summit "A" that stays inside the 72x72 dp adaptive safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:pathData="M34,82 L54,30"
+        android:strokeColor="#5AA9FF"
+        android:strokeWidth="6.5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M74,82 L54,30"
+        android:strokeColor="#5AA9FF"
+        android:strokeWidth="6.5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M42.5,66 L65.5,66"
+        android:strokeColor="#8EC5FF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M54,22 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0"
+        android:fillColor="#22D3EE" />
+    <path
+        android:pathData="M25,88 L83,88"
+        android:strokeColor="#2B3B57"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round" />
+</vector>
