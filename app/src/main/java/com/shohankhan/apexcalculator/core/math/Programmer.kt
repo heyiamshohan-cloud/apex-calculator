@@ -224,7 +224,12 @@ object ProgrammerMath {
 
     private fun arithmetic(raw: BigInteger, template: ProgrammerValue): ProgrammerOutcome {
         val width = template.width
-        val wrapped = raw > width.mask || raw < width.minSigned
+        // A signed register overflows at maxSigned/minSigned, an unsigned one at the mask.
+        val wrapped = if (template.signed) {
+            raw > width.maxSigned || raw < width.minSigned
+        } else {
+            raw > width.mask || raw < BigInteger.ZERO
+        }
         val pattern = raw.mod(width.modulus)
         return ProgrammerOutcome.Success(
             template.copy(pattern = pattern),

@@ -65,7 +65,7 @@ class ExpressionEngineTest {
         assertEquals(512.0, number("2^3^2"), 0.0)
         assertEquals(-4.0, number("-2^2"), 0.0)
         assertEquals(0.25, number("2^-2"), 0.0)
-        assertEquals(0.5, number("4^(1/2)"), tolerance)
+        assertEquals(2.0, number("4^(1/2)"), tolerance)
     }
 
     @Test
@@ -139,7 +139,7 @@ class ExpressionEngineTest {
         assertEquals("0.3", text("0.1 + 0.2"))
         assertEquals("1.5", text("0.5 × 3"))
         assertEquals("2.5", text("10 ÷ 4"))
-        assertEquals("1024", text("2^10"))
+        assertEquals("1,024", text("2^10"))
     }
 
     @Test

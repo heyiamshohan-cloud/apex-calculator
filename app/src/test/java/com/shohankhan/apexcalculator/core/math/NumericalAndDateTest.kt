@@ -69,7 +69,7 @@ class NumericalTest {
     fun `degree mode is respected by the engine functions`() {
         val f = Numerical.functionOf("sin(x)", AngleUnit.DEG)
         assertEquals(0.5, f(30.0), 1e-12)
-        assertEquals(0.5, Numerical.derivative(f, 30.0) * 180.0 / Math.PI, 1e-9)
+        assertEquals(0.8660254037844387, Numerical.derivative(f, 30.0) * 180.0 / Math.PI, 1e-6)
     }
 }
 

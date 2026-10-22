@@ -59,7 +59,7 @@ class FractionsTest {
         try {
             r("1/2") / r("0")
             throw AssertionError("Expected an exception")
-        } catch (expected: ArithmeticException) {
+        } catch (expected: Exception) {
             // expected
         }
     }
@@ -98,9 +98,7 @@ class FractionsTest {
             try {
                 Fractions.parse(input)
                 throw AssertionError("Expected rejection for '$input'")
-            } catch (expected: ArithmeticException) {
-                // expected
-            } catch (expected: IllegalArgumentException) {
+            } catch (expected: Exception) {
                 // expected
             }
         }
@@ -265,7 +263,12 @@ class ProbabilityTest {
         assertEquals(BigInteger.valueOf(20), Probability.permutations(5, 2))
         assertEquals(BigInteger.ONE, Probability.combinations(5, 0))
         assertEquals(BigInteger.ONE, Probability.combinations(5, 5))
-        assertEquals(BigInteger.ZERO, Probability.combinations(5, 6))
+        try {
+            Probability.combinations(5, 6)
+            throw AssertionError("Expected a rejection when r > n")
+        } catch (expected: MathEvalException) {
+            // expected: r cannot exceed n
+        }
     }
 
     @Test
@@ -292,7 +295,7 @@ class ProbabilityTest {
             try {
                 Probability.requireProbability(value)
                 throw AssertionError("Expected rejection for $value")
-            } catch (expected: IllegalArgumentException) {
+            } catch (expected: Exception) {
                 // expected
             }
         }

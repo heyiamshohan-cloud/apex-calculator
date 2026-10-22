@@ -24,7 +24,8 @@ class ProgrammerTest {
     @Test
     fun `radix formatting`() {
         val ten = value(10)
-        assertEquals("1010", ten.format(NumberRadix.BIN, grouped = false))
+        assertEquals("00000000000000000000000000001010", ten.format(NumberRadix.BIN, grouped = false))
+        assertEquals("0000 1010", value(10, BitWidth.W8, signed = false).format(NumberRadix.BIN, grouped = true))
         assertEquals("12", ten.format(NumberRadix.OCT, grouped = false))
         assertEquals("A", ten.format(NumberRadix.HEX, grouped = false))
         assertEquals("10", ten.format(NumberRadix.DEC, grouped = false))
