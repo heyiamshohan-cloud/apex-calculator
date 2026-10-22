@@ -10,10 +10,10 @@ Daemon will be stopped at the end of the build
 > Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
+> Task :app:mergeDebugResources
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:parseDebugLocalResources
-> Task :app:mergeDebugResources
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
 > Task :app:processDebugManifestForPackage
@@ -27,25 +27,107 @@ Daemon will be stopped at the end of the build
 > Task :app:processDebugResources
 > Task :app:checkDebugDuplicateClasses
 > Task :app:kspDebugKotlin
-> Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
 > Task :app:mergeLibDexDebug
 > Task :app:mergeDebugNativeLibs
+> Task :app:mergeExtDexDebug
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
 
-> Task :app:writeDebugSigningConfigVersions
-> Task :app:preDebugUnitTestBuild UP-TO-DATE
 > Task :app:javaPreCompileDebugUnitTest
 
 > Task :app:compileDebugKotlin FAILED
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexWorkspaceScreen.kt:73:72 Unresolved reference 'toPolar'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixWorkspaceScreen.kt:151:34 Unresolved reference 'Error'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixWorkspaceScreen.kt:152:46 Unresolved reference 'message'.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixWorkspaceScreen.kt:154:34 Unresolved reference 'Ok'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:310:26 None of the following candidates is applicable:
+fun Double.pow(x: Double): Double
+fun Double.pow(n: Int): Double
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:332:63 None of the following candidates is applicable:
+fun Double.pow(x: Double): Double
+fun Double.pow(n: Int): Double
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:332:70 Overload resolution ambiguity between candidates:
+fun <T> Iterable<T>.minus(element: T): List<T>
+fun <K, V> Map<out K, V>.minus(key: K): Map<K, V>
+fun <T> Set<T>.minus(element: T): Set<T>
+fun <T> Sequence<T>.minus(element: T): Sequence<T>
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:332:75 None of the following candidates is applicable:
+fun BigDecimal.div(other: BigDecimal): BigDecimal
+fun BigInteger.div(other: BigInteger): BigInteger
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:131:75 Unresolved reference 'parsedDecimal'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:511:40 Unresolved reference 'parsedDecimal'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:512:41 Unresolved reference 'parsedDecimal'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/AboutScreen.kt:56:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/AboutScreen.kt:56:89 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/AboutScreen.kt:57:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/PrivacyScreen.kt:46:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/PrivacyScreen.kt:46:116 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/about/PrivacyScreen.kt:47:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:34:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:38:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:40:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/favorites/FavoritesScreen.kt:54:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:58:50 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:58:106 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:59:61 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:80:46 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:85:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:91:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:105:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/formula/FormulaDetailScreen.kt:106:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:61:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:72:21 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:81:21 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:91:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/history/HistoryScreen.kt:92:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:68:9 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:68:64 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:69:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:109:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:114:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:120:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:136:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/quicksolve/SolverScreen.kt:137:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:59:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:64:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:66:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/settings/SettingsScreen.kt:67:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:101:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:106:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:115:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexScreen.kt:116:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:110:5 Overload resolution ambiguity between candidates:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:115:13 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:125:9 Cannot infer type for this parameter. Please specify it explicitly.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixScreen.kt:126:9 @Composable invocations can only happen from the context of a @Composable function
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/navigation/NavigationScaffolds.kt:13:1 Conflicting overloads:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/navigation/SecondaryScaffold.kt:11:1 Conflicting overloads:
+fun SecondaryScaffold(title: String, subtitle: String? = ..., onBack: (() -> Unit)? = ..., actions: @Composable() ComposableFunction1<RowScope, Unit> = ..., bottomBar: @Composable() ComposableFunction0<Unit> = ..., snackbarHostState: SnackbarHostState = ..., content: @Composable() ComposableFunction1<PaddingValues, Unit>): Unit
 
 FAILURE: Build failed with an exception.
 
@@ -254,5 +336,5 @@ Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilat
 	... 2 more
 
 
-BUILD FAILED in 2m 39s
+BUILD FAILED in 1m 53s
 31 actionable tasks: 31 executed
