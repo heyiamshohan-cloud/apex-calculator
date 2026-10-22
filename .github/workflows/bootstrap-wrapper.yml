@@ -3,6 +3,9 @@ name: Bootstrap Gradle Wrapper
 # One-time helper: this repository was created without a local JDK/Gradle, so the
 # binary Gradle wrapper JAR is generated on a runner and committed back.
 on:
+  push:
+    paths:
+      - 'gradle/wrapper/gradle-wrapper.jar'
   workflow_dispatch:
 
 permissions:

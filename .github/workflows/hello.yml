@@ -1,0 +1,10 @@
+name: Sanity
+on:
+  push:
+    paths:
+      - '.github/workflows/hello.yml'
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "actions work on this repository"; uname -a
