@@ -1,0 +1,79 @@
+== environment ==
+openjdk version "17.0.20.1" 2026-08-18
+OpenJDK Runtime Environment Temurin-17.0.20.1+1 (build 17.0.20.1+1)
+OpenJDK 64-Bit Server VM Temurin-17.0.20.1+1 (build 17.0.20.1+1, mixed mode, sharing)
+== downloading gradle 8.9 ==
+-rw-r--r-- 1 runner runner 136114148 Oct 22 13:29 /tmp/gradle.zip
+
+Welcome to Gradle 8.9!
+
+Here are the highlights of this release:
+ - Enhanced Error and Warning Messages
+ - IDE Integration Improvements
+ - Daemon JVM Information
+
+For more details see https://docs.gradle.org/8.9/release-notes.html
+
+
+------------------------------------------------------------
+Gradle 8.9
+------------------------------------------------------------
+
+Build time:    2024-07-11 14:37:41 UTC
+Revision:      d536ef36a19186ccc596d8817123e5445f30fef8
+
+Kotlin:        1.9.23
+Groovy:        3.0.21
+Ant:           Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+Launcher JVM:  17.0.20.1 (Eclipse Adoptium 17.0.20.1+1)
+Daemon JVM:    /usr/lib/jvm/temurin-17-jdk-amd64 (no JDK specified, using current Java home)
+OS:            Linux 7.0.0-1017-azure amd64
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.9/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :wrapper
+
+BUILD SUCCESSFUL in 22s
+1 actionable task: 1 executed
+== generated ==
+/tmp/wrappergen/.gradle/8.9/gc.properties
+/tmp/wrappergen/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+/tmp/wrappergen/.gradle/buildOutputCleanup/cache.properties
+/tmp/wrappergen/.gradle/buildOutputCleanup/outputFiles.bin
+/tmp/wrappergen/.gradle/vcs-1/gc.properties
+/tmp/wrappergen/gradle/wrapper/gradle-wrapper.jar
+/tmp/wrappergen/gradle/wrapper/gradle-wrapper.properties
+/tmp/wrappergen/gradlew
+/tmp/wrappergen/gradlew.bat
+/tmp/wrappergen/settings.gradle.kts
+'/tmp/wrappergen/gradle/wrapper/gradle-wrapper.jar' -> 'gradle/wrapper/gradle-wrapper.jar'
+'/tmp/wrappergen/gradle/wrapper/gradle-wrapper.properties' -> 'gradle/wrapper/gradle-wrapper.properties'
+'/tmp/wrappergen/gradlew' -> './gradlew'
+'/tmp/wrappergen/gradlew.bat' -> './gradlew.bat'
+== verifying wrapper (downloads distribution) ==
+Downloading https://services.gradle.org/distributions/gradle-8.9-bin.zip
+............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+
+------------------------------------------------------------
+Gradle 8.9
+------------------------------------------------------------
+
+Build time:    2024-07-11 14:37:41 UTC
+Revision:      d536ef36a19186ccc596d8817123e5445f30fef8
+
+Kotlin:        1.9.23
+Groovy:        3.0.21
+Ant:           Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+Launcher JVM:  17.0.20.1 (Eclipse Adoptium 17.0.20.1+1)
+Daemon JVM:    /usr/lib/jvm/temurin-17-jdk-amd64 (no JDK specified, using current Java home)
+OS:            Linux 7.0.0-1017-azure amd64
+
+== committing ==
+[arena/838ca00e-apex-calculator 5a6a433] chore: add Gradle wrapper 8.9 (generated on CI) [skip ci]
+ 4 files changed, 353 insertions(+)
+ create mode 100644 gradle/wrapper/gradle-wrapper.jar
+ create mode 100644 gradle/wrapper/gradle-wrapper.properties
+ create mode 100755 gradlew
+ create mode 100644 gradlew.bat
+To https://github.com/heyiamshohan-cloud/apex-calculator
+   a50b2ca..5a6a433  HEAD -> arena/838ca00e-apex-calculator
