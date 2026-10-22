@@ -307,7 +307,7 @@ internal fun sequenceSolvers(): List<SolverSpec> = listOf(
         val r = input.number("r", "the common ratio")
         val n = input.integer("n", "the term number")
         if (n < 1) throw SolverException("The term number must be at least 1")
-        val term = a * r.pow(n - 1)
+        val term = a * r.pow((n - 1).toInt())
         SolverOutput(
             headline = SolverFormat.number(term),
             headlineLabel = "a$n",
@@ -329,7 +329,7 @@ internal fun sequenceSolvers(): List<SolverSpec> = listOf(
         val r = input.number("r", "the common ratio")
         val n = input.integer("n", "the number of terms")
         if (n < 1) throw SolverException("The number of terms must be at least 1")
-        val sum = if (abs(r - 1.0) < 1e-15) a * n else a * (r.pow(n) - 1) / (r - 1)
+        val sum = if (abs(r - 1.0) < 1e-15) a * n else a * (r.pow(n.toInt()) - 1) / (r - 1)
         SolverOutput(
             headline = SolverFormat.number(sum),
             headlineLabel = "S$n",

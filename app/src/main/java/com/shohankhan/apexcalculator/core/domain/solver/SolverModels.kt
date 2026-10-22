@@ -153,3 +153,9 @@ internal fun evaluateAt(expression: String, x: Double, angleUnit: AngleUnit): Do
 } catch (exception: Exception) {
     throw SolverException(exception.message ?: "The expression could not be evaluated")
 }
+
+internal fun parsedDecimal(text: String, label: String): java.math.BigDecimal = try {
+    java.math.BigDecimal(text.trim().replace(",", ""))
+} catch (exception: NumberFormatException) {
+    throw SolverException("$label must be a number")
+}
