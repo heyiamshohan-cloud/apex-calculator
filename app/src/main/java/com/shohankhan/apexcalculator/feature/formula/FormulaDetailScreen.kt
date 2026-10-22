@@ -184,7 +184,7 @@ fun FormulaDetailScreen(
                     ApexCard {
                         Column {
                             Text(
-                                text = result.result.primaryText ?: formatPrimary(result.result.primary),
+                                text = result.result.primaryText ?: formatResult(result.result.primary),
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = colors.primary,
                             )
@@ -259,5 +259,3 @@ private fun compute(formula: FormulaDefinition, raw: Map<String, String>): Formu
         FormulaOutcome.Error("The calculation overflowed or divided by zero")
     }
 }
-
-private fun formatPrimary(value: Double): String = formatResult(value)

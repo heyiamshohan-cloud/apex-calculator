@@ -95,13 +95,26 @@ data class ProgrammerValue(
             val cleaned = text.trim().replace(" ", "").replace(",", "").replace("_", "")
             if (cleaned.isEmpty()) return null
             val negative = cleaned.startsWith("-")
-            val digits = if (negative) cleaned.substring(1) else cleaned
+            val body = if (negative) cleaned.substring(1) else cleaned
+            // 0b / 0o / 0x prefixes select the radix explicitly, whatever is highlighted.
+            val effectiveRadix = when {
+                body.startsWith("0x", ignoreCase = true) -> NumberRadix.HEX
+                body.startsWith("0b", ignoreCase = true) -> NumberRadix.BIN
+                body.startsWith("0o", ignoreCase = true) -> NumberRadix.OCT
+                else -> radix
+            }
+            val digits = when {
+                body.startsWith("0x", ignoreCase = true) -> body.substring(2)
+                body.startsWith("0b", ignoreCase = true) -> body.substring(2)
+                body.startsWith("0o", ignoreCase = true) -> body.substring(2)
+                else -> body
+            }
             if (digits.isEmpty()) return null
-            val validDigits = "0123456789ABCDEF".take(radix.base)
+            val validDigits = "0123456789ABCDEF".take(effectiveRadix.base)
             if (!digits.uppercase().all { it in validDigits }) return null
-            val magnitude = digits.toBigIntegerOrNull(radix.base) ?: return null
+            val magnitude = digits.toBigIntegerOrNull(effectiveRadix.base) ?: return null
             val signedValue = if (negative) magnitude.negate() else magnitude
-            if (radix == NumberRadix.DEC && signed) {
+            if (effectiveRadix == NumberRadix.DEC && signed) {
                 if (signedValue > width.maxSigned || signedValue < width.minSigned) return null
             } else if (signedValue > width.mask) {
                 return null

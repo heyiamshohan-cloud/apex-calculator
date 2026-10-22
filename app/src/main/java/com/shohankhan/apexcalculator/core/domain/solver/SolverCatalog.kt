@@ -8,7 +8,7 @@ object SolverCatalog {
         addAll(ratioSolvers())
         addAll(numberTheorySolvers())
         addAll(geometrySolvers())
-        addAll(algebraSolvers())
+        addAll(linearEquationSolvers())
         addAll(sequenceSolvers())
         addAll(exponentSolvers())
         addAll(statisticsSolvers())
