@@ -10,12 +10,13 @@ Daemon will be stopped at the end of the build
 > Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
-> Task :app:mergeDebugResources
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:parseDebugLocalResources
+> Task :app:mergeDebugResources
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
@@ -23,36 +24,28 @@ Daemon will be stopped at the end of the build
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
 > Task :app:desugarDebugFileDependencies
-> Task :app:mergeDebugJniLibFolders
+> Task :app:processDebugResources
 > Task :app:checkDebugDuplicateClasses
-> Task :app:mergeDebugNativeLibs
-> Task :app:processDebugManifestForPackage
+> Task :app:kspDebugKotlin
 > Task :app:mergeExtDexDebug
+> Task :app:mergeDebugJniLibFolders
 > Task :app:mergeLibDexDebug
+> Task :app:mergeDebugNativeLibs
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libdatastore_shared_counter.so.
 
-> Task :app:processDebugResources
-> Task :app:validateSigningDebug
-> Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:preDebugUnitTestBuild UP-TO-DATE
 > Task :app:javaPreCompileDebugUnitTest
-> Task :app:kspDebugKotlin
 
 > Task :app:compileDebugKotlin FAILED
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:388:64 Argument type mismatch: actual type is 'kotlin.Long', but 'kotlin.Int' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogAlgebra.kt:388:91 Argument type mismatch: actual type is 'kotlin.Long', but 'kotlin.Int' was expected.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogBasics.kt:27:64 None of the following candidates is applicable:
-fun abs(x: Double): Double
-fun abs(x: Float): Float
-fun abs(n: Int): Int
-fun abs(n: Long): Long
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:325:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:352:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:383:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
-e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/core/domain/solver/SolverCatalogTools.kt:412:53 Cannot access 'fun Map<String, String>.angleUnit(): AngleUnit': it is private in file.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/ComplexWorkspaceScreen.kt:73:72 Unresolved reference 'toPolar'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixWorkspaceScreen.kt:151:34 Unresolved reference 'Error'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixWorkspaceScreen.kt:152:46 Unresolved reference 'message'.
+e: file:///home/runner/work/apex-calculator/apex-calculator/app/src/main/java/com/shohankhan/apexcalculator/feature/tools/MatrixWorkspaceScreen.kt:154:34 Unresolved reference 'Ok'.
 
 FAILURE: Build failed with an exception.
 
@@ -261,5 +254,5 @@ Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilat
 	... 2 more
 
 
-BUILD FAILED in 2m 32s
+BUILD FAILED in 2m 39s
 31 actionable tasks: 31 executed
