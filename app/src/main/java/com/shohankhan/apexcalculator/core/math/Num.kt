@@ -152,7 +152,7 @@ object NumMath {
     }
 
     fun divide(a: Num, b: Num): Num {
-        if (isZero(b)) throw MathEvalException(MathError.DivisionByZero)
+        if (isZero(b)) throw MathEvalException(MathError.DivisionByZero())
         return when {
             a is Num.Cpx || b is Num.Cpx -> Num.Cpx(toComplex(a) / toComplex(b))
             a is Num.Real || b is Num.Real -> {
@@ -196,7 +196,7 @@ object NumMath {
         val baseValue = toDouble(base)
         val exponentValue = toDouble(exponent)
         if (isZero(base) && exponentValue < 0) {
-            throw MathEvalException(MathError.DivisionByZero)
+            throw MathEvalException(MathError.DivisionByZero())
         }
         if (baseValue < 0 && !isIntegerValue(exponent)) {
             if (!allowComplex) {
@@ -222,7 +222,7 @@ object NumMath {
         if (n.signum() < 0) {
             throw MathEvalException(MathError.Domain("Factorial is not defined for negative numbers"))
         }
-        if (n > BigInteger.valueOf(MAX_FACTORIAL)) {
+        if (n > BigInteger.valueOf(MAX_FACTORIAL.toLong())) {
             throw MathEvalException(MathError.Limit("Factorial is limited to $MAX_FACTORIAL!"))
         }
         return Num.IntVal(factorialBig(n.toInt()))
@@ -255,7 +255,7 @@ object NumMath {
         is Num.IntVal -> Num.IntVal(BigInteger.valueOf(value.v.signum().toLong()))
         is Num.Rat -> Num.IntVal(BigInteger.valueOf(value.r.signum.toLong()))
         is Num.Dec -> Num.IntVal(BigInteger.valueOf(value.d.signum().toLong()))
-        is Num.Real -> Num.IntVal(BigInteger.valueOf(value.d.signum().toLong()))
+        is Num.Real -> Num.IntVal(BigInteger.valueOf(when { value.d > 0 -> 1L; value.d < 0 -> -1L; else -> 0L }))
         is Num.Cpx -> Num.IntVal(BigInteger.valueOf(if (value.c.modulus == 0.0) 0L else 1L))
     }
 

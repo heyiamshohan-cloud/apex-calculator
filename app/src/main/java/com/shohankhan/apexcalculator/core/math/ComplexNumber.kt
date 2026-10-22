@@ -30,7 +30,7 @@ data class ComplexNumber(val re: Double, val im: Double) {
 
     operator fun div(other: ComplexNumber): ComplexNumber {
         val denominator = other.re * other.re + other.im * other.im
-        if (denominator == 0.0) throw MathEvalException(MathError.DivisionByZero)
+        if (denominator == 0.0) throw MathEvalException(MathError.DivisionByZero())
         return ComplexNumber(
             (re * other.re + im * other.im) / denominator,
             (im * other.re - re * other.im) / denominator,

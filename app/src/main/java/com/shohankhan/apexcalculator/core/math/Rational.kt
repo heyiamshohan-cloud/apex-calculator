@@ -31,7 +31,7 @@ data class Rational private constructor(
         of(numerator * other.numerator, denominator * other.denominator)
 
     operator fun div(other: Rational): Rational {
-        if (other.isZero) throw MathEvalException(MathError.DivisionByZero)
+        if (other.isZero) throw MathEvalException(MathError.DivisionByZero())
         return of(numerator * other.denominator, denominator * other.numerator)
     }
 
@@ -45,7 +45,7 @@ data class Rational private constructor(
         if (exponent > 0) {
             return of(numerator.pow(exponent), denominator.pow(exponent))
         }
-        if (numerator.signum() == 0) throw MathEvalException(MathError.DivisionByZero)
+        if (numerator.signum() == 0) throw MathEvalException(MathError.DivisionByZero())
         val positive = exponent * -1
         return of(denominator.pow(positive), numerator.pow(positive))
     }
@@ -110,7 +110,7 @@ data class Rational private constructor(
         val ONE: Rational = Rational(BigInteger.ONE, BigInteger.ONE)
 
         fun of(numerator: BigInteger, denominator: BigInteger): Rational {
-            if (denominator.signum() == 0) throw MathEvalException(MathError.DivisionByZero)
+            if (denominator.signum() == 0) throw MathEvalException(MathError.DivisionByZero())
             var num = numerator
             var den = denominator
             if (den.signum() < 0) {

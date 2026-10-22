@@ -243,7 +243,7 @@ object MathFunctions {
         add(
             FunctionSpec("mod", 2, 2, "Remainder with the sign of the divisor") { args, _ ->
                 val divisor = NumMath.toDouble(args[1])
-                if (divisor == 0.0) throw MathEvalException(MathError.DivisionByZero)
+                if (divisor == 0.0) throw MathEvalException(MathError.DivisionByZero())
                 if (isIntegral(args[0]) && isIntegral(args[1])) {
                     val a = NumMath.asBigInteger(args[0])!!
                     val b = NumMath.asBigInteger(args[1])!!
@@ -257,7 +257,7 @@ object MathFunctions {
         add(
             FunctionSpec("rem", 2, 2, "Remainder with the sign of the dividend") { args, _ ->
                 val divisor = NumMath.toDouble(args[1])
-                if (divisor == 0.0) throw MathEvalException(MathError.DivisionByZero)
+                if (divisor == 0.0) throw MathEvalException(MathError.DivisionByZero())
                 if (isIntegral(args[0]) && isIntegral(args[1])) {
                     Num.IntVal(NumMath.asBigInteger(args[0])!!.rem(NumMath.asBigInteger(args[1])!!))
                 } else {

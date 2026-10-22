@@ -11,6 +11,7 @@ import com.shohankhan.apexcalculator.core.domain.model.CalculationSource
 import com.shohankhan.apexcalculator.core.domain.model.HistoryRecord
 import com.shohankhan.apexcalculator.core.domain.model.MemoryState
 import com.shohankhan.apexcalculator.core.domain.toEvalOptions
+import com.shohankhan.apexcalculator.core.domain.toFormatSettings
 import com.shohankhan.apexcalculator.core.math.CalculatorEngine
 import com.shohankhan.apexcalculator.core.math.EvalOutcome
 import com.shohankhan.apexcalculator.core.math.ExpressionPreview

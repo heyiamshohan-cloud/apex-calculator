@@ -37,8 +37,8 @@ object ApexIcons {
     val Scientific: ImageVector = icon("ApexScientific") {
         stroke {
             moveTo(2.5f, 12f); lineTo(21.5f, 12f)
-            moveTo(3f, 17.5f); cubicTo(6f, 6f, 8.5f, 6f, 11f, 12f)
-            cubicTo(13.5f, 18f, 16.5f, 18f, 20f, 7f)
+            moveTo(3f, 17.5f); curveTo(6f, 6f, 8.5f, 6f, 11f, 12f)
+            curveTo(13.5f, 18f, 16.5f, 18f, 20f, 7f)
             moveTo(12f, 9.5f); lineTo(12f, 14.5f)
         }
     }

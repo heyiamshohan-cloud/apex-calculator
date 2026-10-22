@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -37,6 +38,7 @@ import com.shohankhan.apexcalculator.core.designsystem.IconAction
 import com.shohankhan.apexcalculator.core.designsystem.KeyButton
 import com.shohankhan.apexcalculator.core.designsystem.KeyStyle
 import com.shohankhan.apexcalculator.core.designsystem.apexColors
+import com.shohankhan.apexcalculator.core.domain.toFormatSettings
 import androidx.compose.ui.text.input.TextFieldValue
 
 @Composable

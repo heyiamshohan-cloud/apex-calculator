@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -253,6 +254,7 @@ fun KeyButton(
             .background(if (enabled) background else background.copy(alpha = 0.4f))
             .clickable(
                 interactionSource = interactionSource,
+                indication = LocalIndication.current,
                 enabled = enabled,
                 role = Role.Button,
                 onClick = {
