@@ -34,7 +34,7 @@ object Probability {
     }
 
     fun requireProbability(value: Double, label: String = "Probability"): Double {
-        if (value < 0.0 || value > 1.0) {
+        if (!value.isFinite() || value < 0.0 || value > 1.0) {
             throw MathEvalException(MathError.Domain("$label must be between 0 and 1"))
         }
         return value

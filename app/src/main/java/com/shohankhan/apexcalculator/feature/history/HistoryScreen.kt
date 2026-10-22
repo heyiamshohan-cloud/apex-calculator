@@ -28,6 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -56,6 +58,7 @@ fun HistoryScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val colors = MaterialTheme.apexColors
+    val clipboard = LocalClipboardManager.current
     var confirmClear by remember { mutableStateOf(false) }
 
     SecondaryScaffold(
@@ -146,6 +149,9 @@ fun HistoryScreen(
                                 record = record,
                                 selected = record.id in state.selectedIds,
                                 selecting = state.isSelecting,
+                                onCopy = {
+                                    clipboard.setText(AnnotatedString("${record.expression} = ${record.result}"))
+                                },
                                 onLongClick = { viewModel.toggleSelection(record) },
                                 onClick = {
                                     if (state.isSelecting) {
@@ -184,6 +190,7 @@ private fun HistoryRow(
     record: HistoryRecord,
     selected: Boolean,
     selecting: Boolean,
+    onCopy: () -> Unit,
     onLongClick: () -> Unit,
     onClick: () -> Unit,
 ) {
@@ -245,6 +252,13 @@ private fun HistoryRow(
                         color = colors.textTertiary,
                     )
                 }
+            }
+            if (!selecting) {
+                IconAction(
+                    icon = ApexIcons.Copy,
+                    description = "Copy this record",
+                    onClick = onCopy,
+                )
             }
         }
     }
