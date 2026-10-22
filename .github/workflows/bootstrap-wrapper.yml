@@ -12,15 +12,10 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: bootstrap-wrapper
-  cancel-in-progress: false
-
 jobs:
   wrapper:
     name: Generate and commit Gradle wrapper
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('gradle/wrapper/gradle-wrapper.jar') == '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,18 +23,30 @@ jobs:
           ref: ${{ github.ref_name }}
           fetch-depth: 0
 
+      - name: Check whether the wrapper already exists
+        id: check
+        run: |
+          if [ -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up JDK 17
+        if: steps.check.outputs.present == 'false'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Install Gradle
+        if: steps.check.outputs.present == 'false'
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.9'
 
       - name: Generate wrapper in a scratch directory
+        if: steps.check.outputs.present == 'false'
         run: |
           set -euo pipefail
           mkdir -p /tmp/wrappergen
@@ -53,12 +60,14 @@ jobs:
           chmod +x "$GITHUB_WORKSPACE/gradlew"
 
       - name: Verify wrapper
+        if: steps.check.outputs.present == 'false'
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE"
           ./gradlew --version
 
       - name: Commit wrapper
+        if: steps.check.outputs.present == 'false'
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE"
@@ -73,5 +82,6 @@ jobs:
           fi
 
       - name: Emit base64 fallback of wrapper jar
+        if: steps.check.outputs.present == 'false'
         run: |
           base64 -w 0 gradle/wrapper/gradle-wrapper.jar | fold -w 500
